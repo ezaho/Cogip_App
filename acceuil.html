@@ -1,14 +1,17 @@
-<?php
-  require("client.php");
-  require("fournisseur.php");
-  require("facture.php");
-  require("annuaire.php");
-  require("detailsociete.php");
-  require("detailfacture.php");
-  require("detailcontact.php");
-  require("footer.php");
-  ?>
-  <!DOCTYPE html>
+ <?php
+try {//nom du PDO
+  $dbh
+  $dbh = new PDO('mysql:host=localhost;dbname=comptabilite', 'root', 'user');
+  $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+print "Erreur !: " . $e->getMessage() . "<br/>";
+die();
+}
+print_r($_POST);
+   $sqlrequest = "SELECT date_facture FROM facture ORDER BY id DESC LIMIT 0,5";
+
+?>
+<!DOCTYPE html>
 <html>
     <head>
        <title>App de Ranu</title>
@@ -29,7 +32,7 @@
      	      <li><a href="fournisseur.php">LES FOURNISSEURS</a></li>
      	      <li><a href="detailfacture.php"> FACTURES </a></li>
      	      <li><a href="detailcontact.php">PERSONNES </a></li>
-     	      <li> <a href="detailsociete"> ENTREPRISES</a></li>
+     	      <li> <a href="detailsociete.php"> ENTREPRISES</a></li>
         </ul>
       </div>
     </nav>
@@ -76,6 +79,9 @@
        </div>
        </div>
        </div>
+</div>
+</body>
+</html>
 
        
   
