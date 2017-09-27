@@ -1,3 +1,8 @@
+<?php
+ require 'connection.php';
+ $sqlrequest="SELECT `id_Societe`, `nom`, `adresse`, `tel`, `tva`, `id_type`, `compte bancaire`, `personne contact` FROM `Societe` WHERE id_Societe="6" "
+
+?>
 <table class="table">
     <thead>
       <tr>

@@ -1,15 +1,9 @@
 <?php
-try {//nom du PDO
- 
-  $dbh = new PDO('mysql:host=localhost;dbname=comptabilite', 'root', 'user');
-  $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-print "Erreur !: " . $e->getMessage() . "<br/>";
-die();
-}
-// print_r($_POST);
-   $sqlrequest = "SELECT date_facture FROM facture ORDER BY id DESC LIMIT 0,5";
-
+require "connection.php";
+   $sqlrequest = "SELECT  `numerofacture`, `datefacture` FROM `factures` ORDER BY id_factures DESC LIMIT 0,5  ";
+ $qp = $dbh->prepare($sqlrequest);
+   $qp->execute();
+   $table=$qp->fetchAll();
 ?>
 
 <div class="container">
@@ -17,9 +11,7 @@ die();
            <div class="panel body" >
                <h3> FACTURES </h3> 
               
-            </div>
-       </div>
-  </div>
+      
   <table class="table">
     <thead>
       <tr>
@@ -29,6 +21,16 @@ die();
       </tr>
     </thead>
     <tbody>
+    <?php
+    foreach ($table as $value){
+     
+              echo "<tr>";
+                echo "<td><a href=detailfacture.php?numerofacture=".$value['numerofacture'].">".$value['numerofacture']."</a></td>";
+                echo "<td>".$value['datefacture']."</td>";
+                
+              echo "</tr>";
+                }
+     ?>
       <tr>
         <td></td>
         <td></td>
@@ -38,27 +40,10 @@ die();
         <td></td>
         <td></td>
         
-      </tr>
-      <tr class="">
-        <td></td>
-        <td></td>
-       
-      </tr>
-      <tr class="">
-        <td></td>
-        <td></td>
-        
-      </tr>
-      <tr class="">
-        <td></td>
-        <td></td>
-        
-      </tr>
-      <tr class="">
-        <td></td>
-        <td></td>
-       
-      </tr>
+     </tr>
     </tbody>
   </table>
+        </div>
+       </div>
+  </div>
             

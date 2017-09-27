@@ -1,3 +1,8 @@
+<?php
+require 'connection.php';
+$sqlrequest="SELECT `id_factures`, `numerofacture`, `datefacture`, `bcfacture`, `id_personnes`, `id_societe` FROM `factures` WHERE id_factures="61"  "
+
+?>
 <table class="table">
     <thead>
       <tr>

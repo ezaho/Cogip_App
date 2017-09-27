@@ -1,47 +1,61 @@
 <?php
-try {//nom du PDO
-  $dbh
-  $dbh = new PDO('mysql:host=localhost;dbname=CogipApp', 'root', 'user');
-  $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-print "Erreur !: " . $e->getMessage() . "<br/>";
-die();
-}
-print_r($_POST);
-   $sqlrequest = "SELECT date_facture FROM personne ORDER BY id DESC LIMIT 0,5";
+require "connection.php";
+   $sqlrequest = "SELECT `id_personnes`, `prenom`, `nom`, `email`, `tel`, `id_Societe` FROM `Personnes`ORDER BY nom ASC ";
+   $qp = $dbh->prepare($sqlrequest);
+   $qp->execute();
+   $table=$qp->fetchAll();
 
 ?>
+<div class="container">
+       <div align="center" class="panel panel-default">
+           <div class="panel body" >
+               <h3> ANNUAIRE </h3> 
+              
+      
+  <table class="table">
+    <thead>
+      <tr>
+        <th>id_personnes</th>
+        <th>prenom</th>
+       <th>nom</th>
+        <th>email</th>
+        <th>tel</th>
+        <th>id_Societe</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+    <?php
+    foreach ($table as $value){
+     
+              echo "<tr>";
+                echo "<td>".$value['id_personnes']."</td>";
+                echo "<td>".$value['prenom']."</td>";
+                echo "<td><a href=detailcontact.php?id_personnes=".$value['id_personnes'].">".$value['nom']."</a>"."</td>";
+                echo "<td>".$value['email']."</td>";
+                echo "<td>".$value['tel']."</td>";
+                echo "<td>".$value['id_Societe']."</td>";
+                
+                
+              echo "</tr>";
+                }
+     ?>
+      <tr>
+        <td></td>
+        <td></td>
+        
+      </tr>      
+      <tr class="">
+        <td></td>
+        <td></td>
+        
+     </tr>
+    </tbody>
+  </table>
+        </div>
+       </div>
+  </div>
+            
 
-<!DOCTYPE html>
-<html>
-<head>
-	 <head>
-       <title>App de Ranu</title>
-       <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-       
-  </head>
-</head>
-<body>
-<header>
-    <div>
-    	<h1>App de Ranu</h1>
-    	
-    	<nav class="navbar navbar-default">
-     <div class="container-fluid">
-       <ul class="nav navbar-nav">
-            <li><a href="home.php">HOME</a></li>
-            <li><a href="clients.php">LES CLIENTS</a></li>
-     	      <li><a href="fournisseur.php">LES FOURNISSEURS</a></li>
-            <li><a href="facture.php">FACTURES</a></li>
-     	      <li><a href="detailfacture.php"> DETAILFACTURE </a></li>
-     	      <li><a href="detailcontact.php">DETAILCONTACT </a></li>
-     	      <li> <a href="detailsociete.php">DETAILSOCIETE</a></li>
-        </ul>
-      </div>
-    </nav>
-    </div>
-    </header>
-</body>
-</html>
+
+
